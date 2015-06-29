@@ -34,18 +34,3 @@ database{
     url         = "jdbc:mysql://mysqlagcdb.genoscope.cns.fr"
     basePackage = "fr.cea.ig.database.pkgdb"
 }
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-}
