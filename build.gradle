@@ -9,10 +9,15 @@ buildscript {
 }
 apply plugin: "hibernatetools-gradle-plugin"
 apply plugin: 'java'
+apply plugin: 'maven'
+
+import java.text.SimpleDateFormat
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-version = '1.0'
+version = '1.1'
+group = 'fr.cea.ig'
+description = projectDescription
 
 repositories {
     mavenCentral()
@@ -33,4 +38,21 @@ database{
     schema      = "pkgdb_dev"
     url         = "jdbc:mysql://mysqlagcdb.genoscope.cns.fr"
     basePackage = "fr.cea.ig.database.pkgdb"
+}
+
+jar {
+    manifest {
+        attributes( "Implementation-Title":         rootProject.name,
+                    "Implementation-Version":       version,
+                    "Implementation-Vendor":        "Genoscope, LABGeM",
+                    "provider":                     "Genoscope",
+                    "Created-By":                   "LABGeM",
+                    "Description":                  projectDescription,
+                    "URL":                          projectUrlBase+projectUrlCore,
+                    "License-name":                 "CeCILL-C",
+                    "Build-Date":                   new SimpleDateFormat("yyyy-MM-dd").format(new Date()),
+                    "Build-JDK":                    System.getProperty("java.version"),
+                    "Build-Gradle":                 project.gradle.gradleVersion
+                   )
+    }
 }
